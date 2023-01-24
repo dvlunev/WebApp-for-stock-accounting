@@ -8,7 +8,7 @@ public enum Size {
     SIZE_37_5(37.5f),
     SIZE_38(38f);
 
-    private final float numberSize;
+    private float numberSize;
 
     Size(float numberSize) {
         this.numberSize = numberSize;

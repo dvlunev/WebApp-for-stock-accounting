@@ -1,16 +1,37 @@
 package me.lunev.coursework3.services.Impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import me.lunev.coursework3.model.Sock;
+import me.lunev.coursework3.services.FilesService;
 import me.lunev.coursework3.services.SockService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Service
 public class SockServiceImpl implements SockService {
 
     private static Set<Sock> socks = new HashSet<>();
+
+    private final FilesService filesService;
+
+    public SockServiceImpl(FilesService filesService) {
+        this.filesService = filesService;
+    }
+
+    @PostConstruct
+    private void init() {
+        try {
+            readSocksFromFile();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public Sock arrivalSocks(Sock sock) {
@@ -22,10 +43,12 @@ public class SockServiceImpl implements SockService {
                 }
                 sock1.setQuantity(oldCount + sock.getQuantity());
                 sock1.setStockAvailability(true);
+                saveSocksToFile();
                 return sock1;
             }
         }
         socks.add(sock);
+        saveSocksToFile();
         return sock;
     }
 
@@ -44,9 +67,11 @@ public class SockServiceImpl implements SockService {
                         sock1.setStockAvailability(false);
                     }
                 }
+                saveSocksToFile();
                 return sock1;
             }
         }
+        saveSocksToFile();
         return null;
     }
 
@@ -74,5 +99,25 @@ public class SockServiceImpl implements SockService {
             }
         }
         return sumSocks;
+    }
+
+    @Override
+    public void readSocksFromFile() {
+        try {
+            String json = filesService.readSocksFromFile();
+            socks = new ObjectMapper().readValue(json, new TypeReference<Set<Sock>>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void saveSocksToFile() {
+        try {
+            String json = new ObjectMapper().writeValueAsString(socks);
+            filesService.saveSocksToFile(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

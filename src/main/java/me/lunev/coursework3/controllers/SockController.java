@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import me.lunev.coursework3.model.Sock;
 import me.lunev.coursework3.services.SockService;
+import me.lunev.coursework3.services.SocksOperationsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,11 @@ public class SockController {
 
     private final SockService sockService;
 
-    public SockController(SockService sockService) {
+    private final SocksOperationsService socksOperationsService;
+
+    public SockController(SockService sockService, SocksOperationsService socksOperationsService) {
         this.sockService = sockService;
+        this.socksOperationsService = socksOperationsService;
     }
 
     @Operation(
@@ -52,6 +56,7 @@ public class SockController {
     )
     @PostMapping
     public ResponseEntity<Sock> arrivalSocks(@RequestBody Sock sock) {
+        socksOperationsService.addSockOperationArrival(sock);
         return ResponseEntity.ok(sockService.arrivalSocks(sock));
     }
 
@@ -87,6 +92,7 @@ public class SockController {
         if (newSock == null) {
             return ResponseEntity.notFound().build();
         }
+        socksOperationsService.addSockOperationDelivery(sock);
         return ResponseEntity.ok(newSock);
     }
 
@@ -164,6 +170,7 @@ public class SockController {
         if (newSock == null) {
             return ResponseEntity.notFound().build();
         }
+        socksOperationsService.addSockOperationMinus(sock);
         return ResponseEntity.ok(newSock);
     }
 }

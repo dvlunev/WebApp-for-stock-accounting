@@ -8,7 +8,7 @@ public enum Color {
     YELLOW("yellow"),
     COLORFUL("colorful");
 
-    private final String textColor;
+    private String textColor;
 
     Color(String textColor) {
         this.textColor = textColor;

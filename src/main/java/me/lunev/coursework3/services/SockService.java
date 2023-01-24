@@ -11,4 +11,6 @@ public interface SockService {
                      float size,
                      Integer cottonMin,
                      Integer cottonMax);
+
+    void readSocksFromFile();
 }
