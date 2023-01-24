@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyy HH:mm:ss")
 public class SockOperation {
 
     private String typeOperation;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyy HH:mm:ss")
     private LocalDateTime localDateTime;
     private Sock sock;
 

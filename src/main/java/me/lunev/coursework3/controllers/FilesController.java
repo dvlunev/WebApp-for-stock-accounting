@@ -1,6 +1,5 @@
 package me.lunev.coursework3.controllers;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -146,7 +145,6 @@ public class FilesController {
     }
     )
     @GetMapping(value = "/export/operations")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyy HH:mm:ss")
     public ResponseEntity<InputStreamResource> downloadSocksOperationsFile() throws FileNotFoundException {
         File file = filesService.getSocksOperationsFile();
         if (file.exists()) {
