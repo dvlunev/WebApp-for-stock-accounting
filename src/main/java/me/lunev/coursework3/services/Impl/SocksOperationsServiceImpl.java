@@ -35,7 +35,13 @@ public class SocksOperationsServiceImpl implements SocksOperationsService {
 
     @Override
     public void addSockOperationArrival(Sock sock) {
-        SockOperation sockOperation = new SockOperation("Приемка", sock);
+        Sock sockInOperation = new Sock(
+                sock.getColor(),
+                sock.getSize(),
+                sock.getCottonPart(),
+                sock.getQuantity(),
+                true);
+        SockOperation sockOperation = new SockOperation("Приемка", sockInOperation);
         socksOperations.add(sockOperation);
         saveSocksOperationsToFile();
     }
