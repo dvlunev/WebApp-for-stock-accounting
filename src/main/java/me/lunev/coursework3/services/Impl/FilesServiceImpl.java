@@ -8,8 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
 
+/**
+ * The service class containing the implementation of the interface {@link FilesService}
+ */
 @Service
 public class FilesServiceImpl implements FilesService {
 
@@ -27,7 +29,7 @@ public class FilesServiceImpl implements FilesService {
     public boolean saveSocksToFile(String json) {
         try {
             cleanSocksFile();
-            Files.writeString(Path.of(socksFilePath, socksFileName),json);
+            Files.writeString(Path.of(socksFilePath, socksFileName), json);
             return true;
         } catch (IOException e) {
             return false;
@@ -40,7 +42,7 @@ public class FilesServiceImpl implements FilesService {
             Path path = Path.of(socksFilePath, socksFileName);
             if (!Files.exists(path)) {
                 Files.createFile(path);
-                Files.writeString(path,"[]");
+                Files.writeString(path, "[]");
             }
             return Files.readString(path);
         } catch (IOException e) {
@@ -70,7 +72,7 @@ public class FilesServiceImpl implements FilesService {
     public boolean saveSocksOperationsToFile(String json) {
         try {
             cleanSocksOperationsFile();
-            Files.writeString(Path.of(socksOperationsFilePath, socksOperationsFileName),json);
+            Files.writeString(Path.of(socksOperationsFilePath, socksOperationsFileName), json);
             return true;
         } catch (IOException e) {
             return false;
@@ -83,7 +85,7 @@ public class FilesServiceImpl implements FilesService {
             Path path = Path.of(socksOperationsFilePath, socksOperationsFileName);
             if (!Files.exists(path)) {
                 Files.createFile(path);
-                Files.writeString(path,"[]");
+                Files.writeString(path, "[]");
             }
             return Files.readString(path);
         } catch (IOException e) {

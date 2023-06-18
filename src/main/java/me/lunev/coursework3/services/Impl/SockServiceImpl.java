@@ -12,7 +12,12 @@ import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * The service class containing the implementation of the interface {@link SockService}
+ *
+ * @see Sock
+ * @see FilesService
+ */
 @Service
 public class SockServiceImpl implements SockService {
 
@@ -77,9 +82,9 @@ public class SockServiceImpl implements SockService {
 
     @Override
     public Integer getSumSocks(String color,
-                            float size,
-                            Integer cottonMin,
-                            Integer cottonMax) {
+                               float size,
+                               Integer cottonMin,
+                               Integer cottonMax) {
         if (cottonMin == null && cottonMax == null) {
             throw new IllegalArgumentException("Параметры запроса отсутствуют");
         }

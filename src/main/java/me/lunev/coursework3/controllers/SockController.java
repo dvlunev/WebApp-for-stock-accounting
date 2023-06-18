@@ -15,9 +15,15 @@ import me.lunev.coursework3.services.SocksOperationsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Class - controller for working with socks, containing a set of API endpoints
+ *
+ * @see SockService
+ * @see SocksOperationsService
+ */
 @RestController
 @RequestMapping("api/socks")
-@Tag(name = "Носки", description = "CRUD-операции и другие эндпоинты для работы со складом носков")
+@Tag(name = "Socks", description = "CRUD operations and other endpoints for working with the stock of socks")
 public class SockController {
 
     private final SockService sockService;
@@ -30,13 +36,13 @@ public class SockController {
     }
 
     @Operation(
-            summary = "Регистрирует приход товара на склад",
-            description = "Параметры запроса передаются в теле запроса в виде JSON-объекта"
+            summary = "Registers the arrival of goods at the warehouse",
+            description = "Request parameters are passed in the request body as a JSON object"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Удалось добавить приход, суммарный остаток",
+                    description = "Income added, total balance",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -46,11 +52,11 @@ public class SockController {
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Параметры запроса отсутствуют или имеют некорректный формат"
+                    description = "Query parameters are missing or incorrectly formatted"
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Произошла ошибка, не зависящая от вызывающей стороны"
+                    description = "An error occurred that is not dependent on the caller"
             )
     }
     )
@@ -61,14 +67,14 @@ public class SockController {
     }
 
     @Operation(
-            summary = "Регистрирует отпуск носков со склада",
-            description = "Параметры запроса передаются в теле запроса в виде JSON-объекта, но общее количество носков" +
-                    "указанного цвета и состава не увеличивается, а уменьшается"
+            summary = "Registers the release of socks from the warehouse",
+            description = "The request parameters are passed in the request body as a JSON object, but " +
+                    "the total number of socks of the specified color and composition does not increase, but decreases"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Удалось произвести отпуск носков со склада",
+                    description = "Socks issued from the warehouse",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -78,11 +84,11 @@ public class SockController {
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Товара нет на складе в нужном количестве или параметры запроса имеют некорректный формат"
+                    description = "The product is not in stock in the required quantity or the request parameters are not in the correct format"
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Произошла ошибка, не зависящая от вызывающей стороны"
+                    description = "An error occurred that is not dependent on the caller"
             )
     }
     )
@@ -97,8 +103,8 @@ public class SockController {
     }
 
     @Operation(
-            summary = "Возвращает общее количество носков на складе, соответствующих переданным в параметрах критериям запроса",
-            description = "В данном методе количество носков остается неизменным, так как мы запрашиваем информацию о товарах на складе"
+            summary = "Returns the total number of socks in stock that match the query criteria passed in the parameters",
+            description = "In this method, the number of socks remains the same as we are requesting information about the items in stock."
     )
     @Parameters(value = {
             @Parameter(name = "color", example = "red"),
@@ -110,7 +116,7 @@ public class SockController {
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Запрос выполнен, результат в теле ответа в виде строкового представления целого числа",
+                    description = "Request completed, result in response body as a string representation of an integer",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -120,11 +126,11 @@ public class SockController {
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Параметры запроса отсутствуют или имеют некорректный формат"
+                    description = "Query parameters are missing or incorrectly formatted"
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Произошла ошибка, не зависящая от вызывающей стороны"
+                    description = "An error occurred that is not dependent on the caller"
             )
     }
     )
@@ -140,13 +146,13 @@ public class SockController {
     }
 
     @Operation(
-            summary = "Регистрирует списание испорченных (бракованных) носков",
-            description = "Параметры запроса передаются в теле запроса в виде JSON-объекта"
+            summary = "Registers the write-off of damaged (defective) socks",
+            description = "Request parameters are passed in the request body as a JSON object"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Запрос выполнен, товар списан со склада",
+                    description = "Request completed, item removed from stock",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -156,11 +162,11 @@ public class SockController {
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Товара нет на складе в нужном количестве или параметры запроса имеют некорректный формат"
+                    description = "The product is not in stock in the required quantity or the request parameters are not in the correct format"
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Произошла ошибка, не зависящая от вызывающей стороны"
+                    description = "An error occurred that is not dependent on the caller"
             )
     }
     )

@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * The class describes an Operation with a sock (type, time)
+ *
+ * @see Sock
+ */
 @Data
 @NoArgsConstructor
 public class SockOperation {

@@ -22,9 +22,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 
+/**
+ * Class - controller for working with files, containing a set of API endpoints
+ *
+ * @see FilesService
+ * @see SockService
+ * @see SocksOperationsService
+ */
 @RestController
 @RequestMapping("/files")
-@Tag(name = "Носки - файлы", description = "CRUD-операции и другие эндпоинты для работы c файлами склада носков")
+@Tag(name = "Socks - files", description = "CRUD operations and other endpoints for working with sock warehouse files")
 public class FilesController {
 
     private final FilesService filesService;
@@ -40,13 +47,13 @@ public class FilesController {
     }
 
     @Operation(
-            summary = "Экспорт данных в текущем состоянии",
-            description = "Эндопоинт формирует из данных в памяти JSON, записывает его в файл и выгружает по запросу"
+            summary = "Export data in current state",
+            description = "Endopoint generates JSON from data in memory, writes it to a file and unloads it on request"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Запрос выполнен, файл доступен для скачивания",
+                    description = "Request completed, file available for download",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -56,11 +63,11 @@ public class FilesController {
             ),
             @ApiResponse(
                     responseCode = "204",
-                    description = "Файл не найден"
+                    description = "File not found"
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Произошла ошибка, не зависящая от вызывающей стороны"
+                    description = "An error occurred that is not dependent on the caller"
             )
     }
     )
@@ -72,7 +79,7 @@ public class FilesController {
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
                     .contentLength(file.length())
-                    .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"SocksLog.json\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"SocksLog.json\"")
                     .body(resource);
         } else {
             return ResponseEntity.noContent().build();
@@ -80,13 +87,13 @@ public class FilesController {
     }
 
     @Operation(
-            summary = "Импорт данных",
-            description = "Эндпоинт принимает на вход json-файл с данными и заменяет ими данные в памяти"
+            summary = "Data import",
+            description = "The endpoint accepts a json file with data as input and replaces the data in memory with them"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Запрос выполнен, данные из файла импортированы",
+                    description = "Request completed, data from file imported",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -96,11 +103,11 @@ public class FilesController {
             ),
             @ApiResponse(
                     responseCode = "204",
-                    description = "Файл не найден"
+                    description = "File not found"
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Произошла ошибка, не зависящая от вызывающей стороны"
+                    description = "An error occurred that is not dependent on the caller"
             )
     }
     )
@@ -119,14 +126,14 @@ public class FilesController {
     }
 
     @Operation(
-            summary = "Экспорт операций приемки и выдачи носков",
-            description = "Эндопоинт формирует историю операций приемки и выдачи носков из данных в памяти JSON," +
-                    "записывает его в файл и выгружает по запросу"
+            summary = "Export operations of receiving and issuing socks",
+            description = "Endopoint generates a history of operations for receiving and issuing socks from data " +
+                    "in JSON memory, writes it to a file and uploads it on request"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Запрос выполнен, файл доступен для скачивания",
+                    description = "Request completed, file available for download",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -136,11 +143,11 @@ public class FilesController {
             ),
             @ApiResponse(
                     responseCode = "204",
-                    description = "Файл не найден"
+                    description = "File not found"
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Произошла ошибка, не зависящая от вызывающей стороны"
+                    description = "An error occurred that is not dependent on the caller"
             )
     }
     )
@@ -152,7 +159,7 @@ public class FilesController {
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
                     .contentLength(file.length())
-                    .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"SocksOperationsLog.json\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"SocksOperationsLog.json\"")
                     .body(resource);
         } else {
             return ResponseEntity.noContent().build();
@@ -160,13 +167,13 @@ public class FilesController {
     }
 
     @Operation(
-            summary = "Импорт операций приемки и выдачи носков",
-            description = "Эндпоинт принимает на вход json-файл с данными и заменяет ими данные в памяти"
+            summary = "Import operations of receiving and issuing socks",
+            description = "The endpoint accepts a json file with data as input and replaces the data in memory with them"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Запрос выполнен, данные из файла импортированы",
+                    description = "Request completed, data from file imported",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -176,11 +183,11 @@ public class FilesController {
             ),
             @ApiResponse(
                     responseCode = "204",
-                    description = "Файл не найден"
+                    description = "File not found"
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Произошла ошибка, не зависящая от вызывающей стороны"
+                    description = "An error occurred that is not dependent on the caller"
             )
     }
     )

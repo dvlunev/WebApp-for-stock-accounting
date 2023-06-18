@@ -13,6 +13,12 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 
+/**
+ * The service class containing the implementation of the interface {@link SocksOperationsService}
+ *
+ * @see SockOperation
+ * @see FilesService
+ */
 @Service
 public class SocksOperationsServiceImpl implements SocksOperationsService {
 
@@ -35,13 +41,13 @@ public class SocksOperationsServiceImpl implements SocksOperationsService {
 
     @Override
     public void addSockOperationArrival(Sock sock) {
-        Sock sockInOperation = new Sock(
+        /*Sock sockInOperation = new Sock(
                 sock.getColor(),
                 sock.getSize(),
                 sock.getCottonPart(),
                 sock.getQuantity(),
-                true);
-        SockOperation sockOperation = new SockOperation("Приемка", sockInOperation);
+                true);*/
+        SockOperation sockOperation = new SockOperation("Приемка", sock);
         socksOperations.add(sockOperation);
         saveSocksOperationsToFile();
     }

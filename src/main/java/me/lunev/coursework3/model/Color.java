@@ -1,5 +1,8 @@
 package me.lunev.coursework3.model;
 
+/**
+ * The enum class describes a Color
+ */
 public enum Color {
 
     BlACK("black"),

@@ -6,6 +6,9 @@ import lombok.ToString;
 
 import java.util.Objects;
 
+/**
+ * The class describes a Sock
+ */
 @Getter
 @ToString
 @NoArgsConstructor
